@@ -110,7 +110,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const Text('My Tasks'),
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Colors.transparent, // transparent background
           ),
           body: _buildBody(),
           floatingActionButton: FloatingActionButton(
@@ -234,6 +234,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
+                          color: Color(0xFF1976D2),
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,

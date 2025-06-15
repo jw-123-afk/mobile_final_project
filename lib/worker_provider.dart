@@ -15,4 +15,22 @@ class WorkerProvider extends ChangeNotifier {
     _worker = null;
     notifyListeners();
   }
+
+  void updateWorker({
+    required String name,
+    required String email,
+    required String phone,
+    required String address,
+  }) {
+    if (_worker != null) {
+      _worker = Worker(
+        id: _worker!.id,
+        fullName: name,
+        email: email,
+        phone: phone,
+        address: address,
+      );
+      notifyListeners();
+    }
+  }
 }

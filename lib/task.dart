@@ -35,7 +35,8 @@ class Task {
       return Task(
         id: 0,
         title: 'Error: Invalid Task Data',
-        description: 'There was an error loading this task. Please refresh or contact support.',
+        description:
+            'There was an error loading this task. Please refresh or contact support.',
         assignedTo: 0,
         dateAssigned: DateTime.now(),
         dueDate: DateTime.now().add(const Duration(days: 7)),
@@ -43,12 +44,12 @@ class Task {
       );
     }
   }
-  
+
   static DateTime _parseDate(String dateStr) {
     if (dateStr == null || dateStr.isEmpty) {
       return DateTime.now();
     }
-    
+
     try {
       return DateTime.parse(dateStr);
     } catch (e) {
@@ -56,12 +57,16 @@ class Task {
       try {
         final parts = dateStr.split('-');
         if (parts.length == 3) {
-          return DateTime(int.parse(parts[0]), int.parse(parts[1]), int.parse(parts[2]));
+          return DateTime(
+            int.parse(parts[0]),
+            int.parse(parts[1]),
+            int.parse(parts[2]),
+          );
         }
       } catch (e) {
         print('Failed to parse date: $dateStr');
       }
-      
+
       // If all parsing attempts fail, return current date
       return DateTime.now();
     }

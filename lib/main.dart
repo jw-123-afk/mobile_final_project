@@ -10,6 +10,8 @@ import '/worker.dart';
 import '/worker_provider.dart';
 import '/task_list_screen.dart';
 import '/work_submission_screen.dart';
+import '/submission_history_screen.dart';
+import '/edit_profile_screen.dart';
 
 void main() {
   runApp(
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget {
         '/register': (context) => const RegisterScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/tasks': (context) => const TaskListScreen(),
+        '/submissions': (context) => const SubmissionHistoryScreen(),
+        '/edit-profile': (context) => const EditProfileScreen(),
       },
     );
   }

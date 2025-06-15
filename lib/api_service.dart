@@ -5,7 +5,7 @@ import 'task.dart';
 import './submission.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://10.144.162.180/workers';
+  static const String baseUrl = 'http://10.144.160.232/workers';
 
   Future<Map<String, dynamic>> registerWorker({
     required String fullName,
@@ -90,6 +90,61 @@ class ApiService {
     } else {
       final error = jsonDecode(response.body);
       throw Exception(error['message'] ?? 'Failed to submit work');
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getWorkerSubmissions(int workerId) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/get_submissions.php'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'worker_id': workerId}),
+    );
+
+    final data = jsonDecode(response.body);
+    print('Server Response: $data'); // Debug log
+
+    if (response.statusCode == 200 && data['success']) {
+      final submissions = List<Map<String, dynamic>>.from(data['submissions']);
+      print('Submissions data: $submissions'); // Debug log
+      return submissions;
+    } else {
+      final errorMessage =
+          data['message'] ??
+          data['error_details'] ??
+          'Failed to load submissions';
+      throw Exception(errorMessage);
+    }
+  }
+
+  Future<Map<String, dynamic>> updateProfile({
+    required int workerId,
+    required String name,
+    required String email,
+    required String phone,
+    required String address,
+  }) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/update_profile.php'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'worker_id': workerId,
+        'fullName': name,
+        'email': email,
+        'phone': phone,
+        'address': address,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['success'] == true) {
+        return data;
+      } else {
+        throw Exception(data['message'] ?? 'Failed to update profile');
+      }
+    } else {
+      final error = jsonDecode(response.body);
+      throw Exception(error['message'] ?? 'Failed to update profile');
     }
   }
 }
