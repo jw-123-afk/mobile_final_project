@@ -125,12 +125,8 @@ class _SubmissionHistoryScreenState extends State<SubmissionHistoryScreen> {
 
     if (confirmed == true) {
       try {
-        final worker = context.read<WorkerProvider>().worker;
-        if (worker == null) return;
-
-        await _apiService.submitWork(
-          workId: submission.workId,
-          workerId: worker.id,
+        await _apiService.updateSubmission(
+          submissionId: submission.id,
           submissionText: controller.text,
         );
 
@@ -157,7 +153,7 @@ class _SubmissionHistoryScreenState extends State<SubmissionHistoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Submission History'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFF1976D2),
       ),
       body:
           _isLoading

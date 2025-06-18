@@ -110,7 +110,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const Text('My Tasks'),
-            backgroundColor: Colors.transparent, // transparent background
+            backgroundColor: const Color(0xFF1976D2),
           ),
           body: _buildBody(),
           floatingActionButton: FloatingActionButton(

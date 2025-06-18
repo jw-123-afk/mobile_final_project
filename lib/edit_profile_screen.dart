@@ -74,11 +74,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Profile updated successfully')),
         );
-
-        // Pop back to profile screen
-        if (mounted) {
-          Navigator.of(context).pop();
-        }
       } else {
         throw Exception(result['message'] ?? 'Failed to update profile');
       }
@@ -106,7 +101,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile'), elevation: 0),
+      appBar: AppBar(
+        title: const Text('Profile'),
+        backgroundColor: const Color(0xFF1976D2),
+        automaticallyImplyLeading: false,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(

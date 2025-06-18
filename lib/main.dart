@@ -5,13 +5,9 @@ import 'package:provider/provider.dart';
 
 import '/login_screen.dart';
 import '/register_screen.dart';
-import '/profile_screen.dart';
 import '/worker.dart';
 import '/worker_provider.dart';
-import '/task_list_screen.dart';
-import '/work_submission_screen.dart';
-import '/submission_history_screen.dart';
-import '/edit_profile_screen.dart';
+import '/main_navigation_screen.dart';
 
 void main() {
   runApp(
@@ -40,10 +36,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
-        '/profile': (context) => const ProfileScreen(),
-        '/tasks': (context) => const TaskListScreen(),
-        '/submissions': (context) => const SubmissionHistoryScreen(),
-        '/edit-profile': (context) => const EditProfileScreen(),
+        '/home': (context) => const MainNavigationScreen(),
       },
     );
   }
@@ -74,7 +67,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
         final worker = Worker.fromJson(jsonDecode(workerData));
         if (!mounted) return;
         context.read<WorkerProvider>().setWorker(worker);
-        Navigator.pushReplacementNamed(context, '/profile');
+        Navigator.pushReplacementNamed(context, '/home');
       } else {
         if (!mounted) return;
         Navigator.pushReplacementNamed(context, '/login');

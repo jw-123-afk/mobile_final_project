@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       // Navigate to profile screen
       if (!mounted) return;
-      Navigator.pushReplacementNamed(context, '/profile');
+      Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(

@@ -5,7 +5,7 @@ import 'task.dart';
 import './submission.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://10.144.160.232/workers';
+  static const String baseUrl = 'http://10.144.148.82/workers';
 
   Future<Map<String, dynamic>> registerWorker({
     required String fullName,
@@ -145,6 +145,32 @@ class ApiService {
     } else {
       final error = jsonDecode(response.body);
       throw Exception(error['message'] ?? 'Failed to update profile');
+    }
+  }
+
+  Future<Map<String, dynamic>> updateSubmission({
+    required int submissionId,
+    required String submissionText,
+  }) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/update_submission.php'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'submission_id': submissionId,
+        'submission_text': submissionText,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['success'] == true) {
+        return data;
+      } else {
+        throw Exception(data['message'] ?? 'Failed to update submission');
+      }
+    } else {
+      final error = jsonDecode(response.body);
+      throw Exception(error['message'] ?? 'Failed to update submission');
     }
   }
 }
